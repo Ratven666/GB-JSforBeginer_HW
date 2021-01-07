@@ -2,7 +2,7 @@
 <script>
 
     var answer = Math.trunc(Math.random() * 100);
-    var userAns = +prompt("Угадайте число от 0 до 100");
+    var userAns = getNumber("Угадайте число от 0 до 100");
 
     var maxTryCount = 5;
 
@@ -15,11 +15,26 @@
         } else {
             alert("Вы ввели слишком маленькое число. ");
         }
-        userAns = +prompt("У Вас осталось " + (maxTryCount - tryCount) + " попыток\n" +
+        userAns = getNumber("У Вас осталось " + (maxTryCount - tryCount) + " попыток\n" +
             "Угадайте число от 0 до 100");
 
         if(tryCount == maxTryCount){
             alert("Вы проиграли(");
         }
+    }
+
+    function getNumber(message) {
+        do {
+            var number = +prompt(message);
+            if (isNaN(number)) {
+                alert("Введите число цифрами");
+                continue;
+            }
+            if (number < 0 || number > 100) {
+                alert("Введите число от 0 до 100");
+                continue;
+            }
+        } while (isNaN(number) || number < 0 || number > 100);
+        return number;
     }
 </script>
