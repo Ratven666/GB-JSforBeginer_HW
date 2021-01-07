@@ -1,54 +1,47 @@
 <meta charset="UTF-8">
 <script>
+    var answer;
+    var numderOfPlayers;
+    var stopGameFlag;
+    var getWinner;
+    var playersFlag;
 
-    var answer = Math.trunc(Math.random() * 100);
-
-    var numderOfPlayers = getAnswer("Ведите количество игроков");
-
-    var stopGameFlag = false;
-    var getWinner = false;
-    var playersFlag = new Array(numderOfPlayers);
-    for (var i = 0; i < playersFlag.length; i++) {
-        playersFlag[i] = true;
-    }
+    initGame()
 
     while (!stopGameFlag) {
         for (var i = 0; i < playersFlag.length; i++) {
             if(playersFlag[i]) {
                 playGame("Ход " + (i+1) + " игрока");
             }
-        }
-
-        if(getWinner) {
-            alert("Игрок " + (i) + " выйграл игру!!!!");
-            stopGameFlag = true;
-            var str = prompt("Введите \"Еще\" если хотите сыграть еще раз");
-            if (str.toLowerCase() == "еще") {
-                stopGameFlag = false;
-                //!!!!!!!!!!!! bybywbbhjdfnm buhe
+            for (var j = 0; j < playersFlag.length; j++) {
+                if(playersFlag[j] == true) {
+                    stopGameFlag = false;
+                    break;
+                }
+                stopGameFlag = true;
             }
-            continue;
-        }
-
-        for (var i = 0; i < playersFlag.length; i++) {
-            if(playersFlag[i] == true) {
-                stopGameFlag = false;
+            if(getWinner) {
+                alert("Игрок " + (i+1) + " выйграл игру!!!!");
+                stopGameFlag = true;
+                var str = prompt("Введите \"Еще\" если хотите сыграть еще раз");
+                if (str.toLowerCase() == "еще") {
+                    initGame();
+                    i = 0;
+                }
                 break;
             }
-            stopGameFlag = true;
         }
-
     }
 
     function playGame(message) {
+        if (getWinner) {
+            return;
+        }
         userAns = getAnswer(message + "\nУгадайте число от 0 до 100" + "\nВведите \"Все\" если надоело");
         if (isNaN(userAns)) {
             playersFlag[i] = false;
         } else {
             checkAnswer(userAns);
-            if (getWinner) {
-                return;
-            }
         }
     }
 
@@ -79,6 +72,17 @@
             }
         } while (isNaN(number) || number < 0 || number > 100);
         return number;
+    }
+
+    function initGame() {
+        answer = Math.trunc(Math.random() * 10);
+        numderOfPlayers = getAnswer("Ведите количество игроков");
+        stopGameFlag = false;
+        getWinner = false;
+        playersFlag = new Array(numderOfPlayers);
+        for (var i = 0; i < playersFlag.length; i++) {
+            playersFlag[i] = true;
+        }
     }
 
 </script>
