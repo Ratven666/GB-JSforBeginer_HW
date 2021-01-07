@@ -2,25 +2,47 @@
 <script>
 
     var answer = Math.trunc(Math.random() * 100);
-    var maxTryCount = 5;
 
-    for (var tryCount = 0; tryCount < maxTryCount; tryCount++){
-        playGame("Ход первого игрока");
-        playGame("Ход второго игрока");
+    var numderOfPlayers = getNumber("Ведите количество игроков");
+
+    var stopGameFlag = false;
+    var playersFlag = new Array(numderOfPlayers);
+    for (var i = 0; i < playersFlag.length; i++) {
+        playersFlag[i] = true;
     }
+
+    while (!stopGameFlag) {
+        for (var i = 0; i < playersFlag.length; i++) {
+            if(playersFlag[i]) {
+                playGame("Ход " + (i+1) + " игрока");
+            }
+        }
+        for (var i = 0; i < playersFlag.length; i++) {
+            if(playersFlag[i] == true) {
+                stopGameFlag = false;
+                break;
+            }
+            stopGameFlag = true;
+        }
+
+    }
+
     function playGame(message) {
-        userAns = getNumber(message + "\n" + "У Вас осталось " + (maxTryCount - tryCount) + " попыток\n" +
-            "Угадайте число от 0 до 100");
+        userAns = getNumber(message + "\nУгадайте число от 0 до 100");
         checkAnswer(userAns);
+        var str = prompt("Введите \"Все\" если надоело");
+        if (str.toLowerCase() == "все") {
+            playersFlag[i] = false;
+        }
     }
 
     function checkAnswer(checkedAnswer){
         if(checkedAnswer == answer){
-            alert("Поздравляю, вы угадали! ");
+            alert("Поздравляю, вы угадали!");
         } else if(checkedAnswer > answer){
-            alert("Вы ввели слишком большое число. ");
+            alert("Вы ввели слишком большое число.");
         } else {
-            alert("Вы ввели слишком маленькое число. ");
+            alert("Вы ввели слишком маленькое число.");
         }
     }
 
@@ -33,7 +55,6 @@
             }
             if (number < 0 || number > 100) {
                 alert("Введите число от 0 до 100");
-                continue;
             }
         } while (isNaN(number) || number < 0 || number > 100);
         return number;
