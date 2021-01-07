@@ -8,6 +8,19 @@
 
     initGame()
 
+    // Инициирование начальных значений игры
+    function initGame() {
+        answer = Math.trunc(Math.random() * 10);
+        numderOfPlayers = getAnswer("Ведите количество игроков");
+        stopGameFlag = false;
+        getWinner = false;
+        playersFlag = new Array(numderOfPlayers);
+        for (var i = 0; i < playersFlag.length; i++) {
+            playersFlag[i] = true;
+        }
+    }
+
+    // Сама игра
     while (!stopGameFlag) {
         for (var i = 0; i < playersFlag.length; i++) {
             if(playersFlag[i]) {
@@ -33,18 +46,20 @@
         }
     }
 
+    // Один ход игры
     function playGame(message) {
         if (getWinner) {
             return;
         }
         userAns = getAnswer(message + "\nУгадайте число от 0 до 100" + "\nВведите \"Все\" если надоело");
-        if (isNaN(userAns)) {
+        if (userAns == "все") {
             playersFlag[i] = false;
         } else {
             checkAnswer(userAns);
         }
     }
 
+    // Проверка правильности ответа
     function checkAnswer(checkedAnswer){
         if(checkedAnswer == answer){
             getWinner = true;
@@ -56,11 +71,12 @@
         }
     }
 
+    // Запрос сообщения от пользователя с проверкой корректности
     function getAnswer(message) {
         do {
             var str = prompt(message);
             if (str.toLowerCase() == "все") {
-                return str;
+                return str.toLowerCase();
             }
             number = parseInt(str);
             if (isNaN(number)) {
@@ -72,17 +88,6 @@
             }
         } while (isNaN(number) || number < 0 || number > 100);
         return number;
-    }
-
-    function initGame() {
-        answer = Math.trunc(Math.random() * 10);
-        numderOfPlayers = getAnswer("Ведите количество игроков");
-        stopGameFlag = false;
-        getWinner = false;
-        playersFlag = new Array(numderOfPlayers);
-        for (var i = 0; i < playersFlag.length; i++) {
-            playersFlag[i] = true;
-        }
     }
 
 </script>
