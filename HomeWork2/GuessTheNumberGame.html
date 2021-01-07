@@ -2,24 +2,25 @@
 <script>
 
     var answer = Math.trunc(Math.random() * 100);
-    var userAns = getNumber("Угадайте число от 0 до 100");
-
     var maxTryCount = 5;
 
-    for (var tryCount = 1; tryCount <= maxTryCount; tryCount++){
-        if(userAns == answer){
+    for (var tryCount = 0; tryCount < maxTryCount; tryCount++){
+        playGame("Ход первого игрока");
+        playGame("Ход второго игрока");
+    }
+    function playGame(message) {
+        userAns = getNumber(message + "\n" + "У Вас осталось " + (maxTryCount - tryCount) + " попыток\n" +
+            "Угадайте число от 0 до 100");
+        checkAnswer(userAns);
+    }
+
+    function checkAnswer(checkedAnswer){
+        if(checkedAnswer == answer){
             alert("Поздравляю, вы угадали! ");
-            break;
-        } else if(userAns > answer){
+        } else if(checkedAnswer > answer){
             alert("Вы ввели слишком большое число. ");
         } else {
             alert("Вы ввели слишком маленькое число. ");
-        }
-        userAns = getNumber("У Вас осталось " + (maxTryCount - tryCount) + " попыток\n" +
-            "Угадайте число от 0 до 100");
-
-        if(tryCount == maxTryCount){
-            alert("Вы проиграли(");
         }
     }
 
