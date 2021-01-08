@@ -1,0 +1,93 @@
+<meta charset="UTF-8">
+<script>
+    var answer;
+    var numderOfPlayers;
+    var stopGameFlag;
+    var getWinner;
+    var playersFlag;
+
+    initGame()
+
+    // Инициирование начальных значений игры
+    function initGame() {
+        answer = Math.trunc(Math.random() * 10);
+        numderOfPlayers = getAnswer("Ведите количество игроков");
+        stopGameFlag = false;
+        getWinner = false;
+        playersFlag = new Array(numderOfPlayers);
+        for (var i = 0; i < playersFlag.length; i++) {
+            playersFlag[i] = true;
+        }
+    }
+
+    // Сама игра
+    while (!stopGameFlag) {
+        for (var i = 0; i < playersFlag.length; i++) {
+            if(playersFlag[i]) {
+                playGame("Ход " + (i+1) + " игрока");
+            }
+            for (var j = 0; j < playersFlag.length; j++) {
+                if(playersFlag[j] == true) {
+                    stopGameFlag = false;
+                    break;
+                }
+                stopGameFlag = true;
+            }
+            if(getWinner) {
+                alert("Игрок " + (i+1) + " выйграл игру!!!!");
+                stopGameFlag = true;
+                var str = prompt("Введите \"Еще\" если хотите сыграть еще раз");
+                if (str.toLowerCase() == "еще") {
+                    initGame();
+                    i = 0;
+                }
+                break;
+            }
+        }
+    }
+
+    // Один ход игры
+    function playGame(message) {
+        if (getWinner) {
+            return;
+        }
+        userAns = getAnswer(message + "\nУгадайте число от 0 до 100" + "\nВведите \"Все\" если надоело");
+        if (userAns == "все") {
+            playersFlag[i] = false;
+        } else {
+            checkAnswer(userAns);
+        }
+    }
+
+    // Проверка правильности ответа
+    function checkAnswer(checkedAnswer){
+        if(checkedAnswer == answer){
+            getWinner = true;
+            alert("Поздравляю, вы угадали!");
+        } else if(checkedAnswer > answer){
+            alert("Вы ввели слишком большое число.");
+        } else {
+            alert("Вы ввели слишком маленькое число.");
+        }
+    }
+
+    // Запрос сообщения от пользователя с проверкой корректности
+    function getAnswer(message) {
+        do {
+            var str = prompt(message);
+            if (str.toLowerCase() == "все") {
+                return str.toLowerCase();
+            }
+            number = parseInt(str);
+            if (isNaN(number)) {
+                alert("Введите число цифрами");
+                continue;
+            }
+            if (number < 0 || number > 100) {
+                alert("Введите число от 0 до 100");
+            }
+        } while (isNaN(number) || number < 0 || number > 100);
+        return number;
+    }
+
+</script>
