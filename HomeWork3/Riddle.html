@@ -1,8 +1,8 @@
 
 <meta charset="UTF-8">
 <script>
-    var point = 0;
 
+    var point;
     var riddlesArr = new Array();
 
     riddlesArr.push(["Как человеку не спать 8 дней?", ["спать ночью", "спать по ночам", "спать 8 ночей"]]);
@@ -14,13 +14,18 @@
     riddlesArr.push(["Если пять кошек ловят пять мышей за пять минут, " +
     "то сколько времени нужно одной кошке, чтобы поймать одну мышку?", ["5 минут", "пять минут", "1/12 часа", "5"]]);
 
-    for (var i = 0; i < riddlesArr.length; i++) {
-        var answer = prompt("Загадка " + (i + 1) + ":\n" + riddlesArr[i][0]);
+    playGame(riddlesArr);
 
-        var result = checkAnswer(riddlesArr, answer, i);
-        sendMessage(result, riddlesArr, i);
+    function playGame(riddlesArr) {
+        point = 0;
+        for (var i = 0; i < riddlesArr.length; i++) {
+            var answer = prompt("Загадка " + (i + 1) + ":\n" + riddlesArr[i][0]);
+
+            var result = checkAnswer(riddlesArr, answer, i);
+            sendMessage(result, riddlesArr, i);
+        }
+        congratulations(point);
     }
-    congratulations(point);
 
     function checkAnswer(riddlesArr, answer, numberOfRiddle) {
         for (var i = 0; i < riddlesArr[numberOfRiddle][1].length; i++) {
@@ -42,7 +47,6 @@
             }
             alert("Вы не отгадали( \n \n Правильный ответ: \n" + rAns);
         }
-
     }
 
     function congratulations(point) {
@@ -62,4 +66,3 @@
     }
 
 </script>
-
