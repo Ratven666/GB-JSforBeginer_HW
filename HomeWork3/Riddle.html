@@ -16,6 +16,11 @@
 
     playGame(riddlesArr);
 
+    /**
+     * Функция самой игры
+     *
+     * @param {Array} riddlesArr - массив содержащий загадки и отгадки
+     */
     function playGame(riddlesArr) {
         point = 0;
         for (var i = 0; i < riddlesArr.length; i++) {
@@ -27,6 +32,15 @@
         congratulations(point);
     }
 
+    /**
+     * Функция проверки правильности ответа игрока
+     * В случае правильного ответа - увеличивает счетчик очков на 1
+     *
+     * @param {Array} riddlesArr - Масив загадок
+     * @param {String} answer - ответ игрока
+     * @param {int} numberOfRiddle - номер загадки в массиве
+     * @returns {boolean} - возвращает true если ответ верный, false - если нет
+     */
     function checkAnswer(riddlesArr, answer, numberOfRiddle) {
         for (var i = 0; i < riddlesArr[numberOfRiddle][1].length; i++) {
             if (answer.toLowerCase() == riddlesArr[numberOfRiddle][1][i]) {
@@ -37,6 +51,13 @@
         return false;
     }
 
+    /**
+     * Выводи игроку сообщение о решении загадки
+     *
+     * @param {boolean} result - результат проверки решения загадки
+     * @param {Array} riddlesArr - массив загадок
+     * @param {int} numberOfRiddle - номер загадки в массиве
+     */
     function sendMessage(result, riddlesArr, numberOfRiddle) {
         if (result) {
             alert("Вы отгадали!");
@@ -49,6 +70,11 @@
         }
     }
 
+    /**
+     * Вывод сообщения с итогами игры
+     * 
+     * @param {int} point - количество набранных за игру очков
+     */
     function congratulations(point) {
         if (point == riddlesArr.length) {
             alert("ПОЗДРАВЛЯЮ! \n\n Вы ответили правильно на все загадки!!! \n\n Восхитительно! Невероятно!");
