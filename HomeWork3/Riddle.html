@@ -34,18 +34,23 @@
         }
         point = newPoint;
     }
+    congratulations(point);
 
-    if (point == riddlesArr.length) {
-        alert("ПОЗДРАВЛЯЮ! \n\n Вы ответили правильно на все загадки!!! \n\n Восхитительно! Невероятно!");
-    } else if (point == 0) {
-        alert("К сожалению, вы не ответили ни на одну из этих дурацких загадок(");
-    } else {
-        var str = " загадок!";
-        if (point == 1) {
-            str = " загадку!";
-        } else if (point == 2 || point == 3 || point == 4) {
-            str = " загадки!"
+    function congratulations(point) {
+        if (point == riddlesArr.length) {
+            alert("ПОЗДРАВЛЯЮ! \n\n Вы ответили правильно на все загадки!!! \n\n Восхитительно! Невероятно!");
+        } else if (point == 0) {
+            alert("К сожалению, вы не ответили ни на одну из этих дурацких загадок(");
+        } else {
+            var str = " загадок!";
+            if (point == 1) {
+                str = " загадку!";
+            } else if (point == 2 || point == 3 || point == 4) {
+                str = " загадки!"
+            }
+            alert("Хороший результат! \n\n Вы верно отгадали " + point + str);
         }
-        alert("Хороший результат! \n\n Вы верно отгадали " + point + str);
     }
+
 </script>
+
