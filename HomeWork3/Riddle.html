@@ -16,25 +16,34 @@
 
     for (var i = 0; i < riddlesArr.length; i++) {
         var answer = prompt("Загадка " + (i + 1) + ":\n" + riddlesArr[i][0]);
-        var newPoint = point;
 
-        for (var j = 0; j < riddlesArr[i][1].length; j++) {
-            if (answer.toLowerCase() == riddlesArr[i][1][j]) {
-                alert("Вы отгадали!");
-                newPoint++;
-                break;
+        var result = checkAnswer(riddlesArr, answer, i);
+        sendMessage(result, riddlesArr, i);
+    }
+    congratulations(point);
+
+    function checkAnswer(riddlesArr, answer, numberOfRiddle) {
+        for (var i = 0; i < riddlesArr[numberOfRiddle][1].length; i++) {
+            if (answer.toLowerCase() == riddlesArr[numberOfRiddle][1][i]) {
+                point++;
+                return true;
             }
         }
-        if (newPoint == point) {
+        return false;
+    }
+
+    function sendMessage(result, riddlesArr, numberOfRiddle) {
+        if (result) {
+            alert("Вы отгадали!");
+        } else {
             var rAns = "";
-            for (var j = 0; j < riddlesArr[i][1].length; j++) {
-                rAns += (riddlesArr[i][1][j] + "\n");
+            for (var i = 0; i < riddlesArr[numberOfRiddle][1].length; i++) {
+                rAns += (riddlesArr[numberOfRiddle][1][i] + "\n");
             }
             alert("Вы не отгадали( \n \n Правильный ответ: \n" + rAns);
         }
-        point = newPoint;
+
     }
-    congratulations(point);
 
     function congratulations(point) {
         if (point == riddlesArr.length) {
