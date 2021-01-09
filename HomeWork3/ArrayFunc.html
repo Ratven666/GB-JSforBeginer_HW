@@ -1,6 +1,14 @@
 <meta charset="UTF-8">
 <script>
 
+    function testFunction() {
+        var n = +prompt("Введи целое число n:")
+        alert("Вывод массива [0, 1, ..., " + n + "]:\n" +
+        initArr(n))
+
+    }
+    testFunction();
+
     /**
      * Функция инициализации массива
      *
@@ -8,10 +16,13 @@
      * @returns {arr} - массив [0, 1, ..., n]
      */
     function initArr(n) {
-        var arr = new arr(n + 1);
+        var arr = new Array();
 
+        if (n < 0) {
+            return null;
+        }
         for (var i = 0; i <= n; i++) {
-            arr[i] = n;
+            arr[i] = i;
         }
         return arr;
     }
@@ -58,7 +69,7 @@
 
     /**
      * Фунция возвращающая массив из четынх чисел входного массива
-     * 
+     *
      * @param {Array} array - Массив целых чисел
      * @returns {Array} - Массив из четных чисел входного массива
      */
