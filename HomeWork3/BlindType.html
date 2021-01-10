@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 <script>
-    
+
     var levels = [[["а", "ф"]],
         [["ы", "в"]],
         [["о", "ж"]]];
@@ -21,7 +21,7 @@
 
     function game(levels) {
         alert("Вас приветствует программа по обучению слепой печати");
-        var length = 10;
+        var length = getNumber("Выбереье длинну последовательности символов");
         for (var i = 0; i < levels.length; i++) {
             alert("Вы перешли на " + (i+1) + " уровень!");
             oneLevelPlay(levels[i][0], length, levels[i][1]);
@@ -50,6 +50,21 @@
             text += charSetArr[index];
         }
         return text;
+    }
+
+    function getNumber(message) {
+        do {
+            var number = +prompt(message);
+            if (isNaN(number)) {
+                alert("Введите число цифрами");
+                continue;
+            }
+            if (number < 0) {
+                alert("Введите положительное число");
+                continue;
+            }
+        } while (isNaN(number) || number < 0);
+        return parseInt(number);
     }
 
 </script>

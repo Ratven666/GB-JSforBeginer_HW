@@ -1,54 +1,54 @@
 <meta charset="utf-8">
 <script type="text/javascript">
 
-	var deposit = getNumber("Введите сумму вклада в рублях:");
-	var interestRate = getNumber("Введите процентную ставку, %");
+    var deposit = getNumber("Введите сумму вклада в рублях:");
+    var interestRate = getNumber("Введите процентную ставку, %");
 
-	var yearCount = 5;
+    var yearCount = 5;
 
-	for (var i = 1; i <= yearCount; i++) {
-		deposit = deposit * (1 + interestRate/100);
-		document.write("Сумма вклада через " + i + yearMessage(i) + "составит: " + Math.trunc(deposit) + rubMessage(deposit) + Math.round((deposit - Math.trunc(deposit))*100) + " коп. " + "<br>")
-	}
+    for (var i = 1; i <= yearCount; i++) {
+        deposit = deposit * (1 + interestRate/100);
+        document.write("Сумма вклада через " + i + yearMessage(i) + "составит: " + Math.trunc(deposit) + rubMessage(deposit) + Math.round((deposit - Math.trunc(deposit))*100) + " коп. " + "<br>")
+    }
 
-	function yearMessage(year) {
-		if (year % 10 == 1 && year != 11) {
-			return " год ";
-		}
-		else if ((year % 10 == 2 || year % 10 == 3 || year % 10 == 4) && (year < 10 || year > 20)) {
-			return " года ";
-		}
-		else {
-			return " лет ";
-		} 
-	}
+    function yearMessage(year) {
+        if (year % 10 == 1 && year != 11) {
+            return " год ";
+        }
+        else if ((year % 10 == 2 || year % 10 == 3 || year % 10 == 4) && (year < 10 || year > 20)) {
+            return " года ";
+        }
+        else {
+            return " лет ";
+        } 
+    }
 
-	function rubMessage(rubCount) {
-		var lastRub = Math.trunc(rubCount % 10);
+    function rubMessage(rubCount) {
+        var lastRub = Math.trunc(rubCount % 10);
 
-		if (lastRub == 4 || lastRub == 3 || lastRub == 2) {
-			return " рубля ";
-		}
-		else if (lastRub == 1) {
-			return " рубль ";
-		}
-		else {
-			return " рублей ";
-		}
-	}
+        if (lastRub == 4 || lastRub == 3 || lastRub == 2) {
+            return " рубля ";
+        }
+        else if (lastRub == 1) {
+            return " рубль ";
+        }
+        else {
+            return " рублей ";
+        }
+    }
 
-	function getNumber(message) {
-		do {
-		var number = +prompt(message);
-		if (isNaN(number)) {
-			alert("Введите число цифрами");
-			continue;
-			}
-		if (number < 0) {
-			alert("Введите положительное число");
-			continue;
-			}
-		} while (isNaN(number) || number < 0);
-		return number;
-	}
+    function getNumber(message) {
+        do {
+        var number = +prompt(message);
+        if (isNaN(number)) {
+            alert("Введите число цифрами");
+            continue;
+            }
+        if (number < 0) {
+            alert("Введите положительное число");
+            continue;
+            }
+        } while (isNaN(number) || number < 0);
+        return number;
+    }
 </script>
