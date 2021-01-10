@@ -19,10 +19,13 @@
 
     game(levels);
 
+    /**
+     * Функция самой игры
+     */
     function game(levels) {
         alert("Вас приветствует программа по обучению слепой печати");
                 var length = getNumber("Укажите длинну последовательности символов");
-        chuseHardMode();
+        chouseHardMode();
         for (var i = 0; i < levels.length; i++) {
             alert("Вы перешли на " + (i+1) + " уровень!");
             oneLevelPlay(levels[i][0], length, levels[i][1]);
@@ -30,6 +33,9 @@
         alert("Поздравляю!\nВы прошли игру!")
     }
 
+    /**
+     * Выполнение цикла одного уровня игры
+     */
     function oneLevelPlay(charSet, length, message) {
         while (true) {
             alert(message);
@@ -44,6 +50,12 @@
         }
     }
 
+    /**
+     * Генерирует случайный текст
+     * @param {Array} charSetArr - источни символов в генерируемой последовательности
+     * @param {int} length - длинна возвращаемой последовательности
+     * @return {String} - строка длинны length из случайных символов массива charSetArr
+     */
     function generateText(charSetArr, length) {
         var text = "";
         for (var i = 0; i < length; i++) {
@@ -53,6 +65,9 @@
         return text;
     }
 
+    /**
+     * Просит ввести число и проверяет корректность ввода
+     * */
     function getNumber(message) {
         do {
             var number = +prompt(message);
@@ -68,7 +83,10 @@
         return parseInt(number);
     }
 
-    function chuseHardMode() {
+    /**
+     * Дает игроку выбор пекелючения в усложненный режим
+     */
+    function chouseHardMode() {
         while (true) {
             var str = prompt("Хотите добавить заглавные буква в игру?\n(Да/Нет)");
             if (str.toLowerCase() == "да") {
@@ -80,7 +98,10 @@
         }
     }
 
-    function addUpperCase(levels) {
+    /**
+     * Изменяет массив с заданиями, добавляя к имеющимся символы в верхнем регистре
+     */
+    function addUpperCase() {
         for (var i = 0; i < levels.length; i++) {
             var len = levels[0].length;
             for (var j = 0; j < len; j++) {
