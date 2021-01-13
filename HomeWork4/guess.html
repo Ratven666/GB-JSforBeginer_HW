@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,14 +7,14 @@
 	<link rel="stylesheet" href="style.css"> 
 	<script type="text/javascript">
 
-		var answer = parseInt(Math.random() * 100);
-		var tryCount = 0;
-		var maxTryCount = 3;
-
+		var min = 0;
+		var max = 100;
+		var answer = parseInt(Math.random() * max);
+		var count = 0;
+		
 		function readInt(){
 			var number = document.getElementById("userAnswer").value;
 			return parseInt(number);
-			// return +document.getElementById("userAnswer").value;
 		}
 
 		function write(text){
@@ -25,22 +26,22 @@
 		}
 
 		function guess(){
-			tryCount++;
-
+			var numOfPlayer = (count % 2 == 1) ? 1 : 2;
+			write("Ход " + numOfPlayer + " игрока");
 			var userAnswer = readInt();
-			if(userAnswer == answer){
-				write("<b>Поздравляю, вы угадали!</b>");
-				hide("button");
-				hide("userAnswer");
-			} else if(tryCount >= maxTryCount){
-				write("Вы проиграли<br>Правильный ответ: " + answer);
-				hide("button");
-				hide("userAnswer");
-			} else if(userAnswer > answer){
-				write("Вы ввели слишком большое число<br>Попробуйте еще раз. Введите число от 1 до 100");
+			if(userAnswer > answer){
+				max = userAnswer < max ? userAnswer : max 
+				write("Ход "+ numOfPlayer + " игрока<br>" + "Вы ввели слишком большое число<br>Попробуйте еще раз. Введите число от " + min + " до " + max);
 			} else if(userAnswer < answer){
-				write("Вы ввели слишком маленькое число<br>Попробуйте еще раз. Введите число от 1 до 100");				
+				min = userAnswer > min ? userAnswer : min;
+				write("Ход "+ numOfPlayer + " игрока<br>" + "Вы ввели слишком маленькое число<br>Попробуйте еще раз. Введите число " + min + " до " + max);				
+			} else if(userAnswer == answer){
+				numOfPlayer = (--count % 2 == 1) ? 1 : 2;
+				write("<b>Игрок " + numOfPlayer + " угадал! Поздравляю!</b>");
+				hide("button");
+				hide("userAnswer");
 			}
+			count++;
 		}
 
 	</script>
@@ -51,7 +52,8 @@
 	<div class="header">
 		<a href="index.html">Главная</a>
 		<a href="puzzle.html">Загадки</a>
-		<a href="#">Угадайка</a>
+		<a href="guess.html">Угадайка</a>
+		<a href="password.html">Генератор паролей</a>
 	</div>
 
 <div class="contentWrap">
@@ -62,7 +64,7 @@
 
 			<div class="box">
 
-				<p id="info">Угадайте число от 0 до 100</p>
+				<p id="info">Ход 1 игрока <br> Угадайте число от 0 до 100</p>
 				<input type="text" id="userAnswer">
 				<br>
 				<a href="#" onClick="guess();" id="button">Начать</a>				
@@ -76,7 +78,7 @@
 
 </div>
 <div class="footer">
-	Copyright &copy; Vasily Pupkin
+	Copyright &copy; Mikhail Vystrchil
 <div>
 
 
